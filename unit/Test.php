@@ -10,8 +10,8 @@ class SDKTest extends PUnit{
 	protected $bucket = "php-sdk-test";
 	protected $key = "test==中/文？";
 	protected $key_copy = "test中/文_copy？";
-	protected $accesskey = "lMQTr0hNlMpB0iOk/i+x";
-	protected $secrectkey = "D4CsYLs75JcWEjbiI22zR3P7kJ/+5B1qdEje7A7I";
+	protected $accesskey = "";
+	protected $secrectkey = "";
 	protected $client;
     protected $encryptionClient;
 	protected $cachedir;
@@ -286,7 +286,7 @@ class SDKTest extends PUnit{
         $stat = fstat($resource);
         $total = $stat["size"];//获取文件的总大小
         fclose($resource);
-        $count = (int)($total/$partsize+1);//计算文件需要分几块上传
+        $count = (int)(($total-1)/$partsize)+1;;//计算文件需要分几块上传
         for($i = 0;$i < $count;$i++){
             //依次上传每一块
             $args=array(
@@ -854,7 +854,7 @@ class SDKTest extends PUnit{
         $stat = fstat($resource);
         $total = $stat["size"];//获取文件的总大小
         fclose($resource);
-        $count = (int)($total/$partsize+1);//计算文件需要分几块上传
+        $count = (int)(($total-1)/$partsize)+1;//计算文件需要分几块上传
         for($i = 0;$i < $count;$i++){
             //依次上传每一块
             echo "upload".$i."\r\n";

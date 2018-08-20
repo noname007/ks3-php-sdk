@@ -2,7 +2,7 @@
 require_once "../Ks3Client.class.php";
 require_once "../core/Utils.class.php";
 
-$client = new Ks3Client("2HITWMQXL2VBB3XMAEHQ","ilZQ9p/NHAK1dOYA/dTKKeIqT/t67rO6V2PrXUNr");
+$client = new Ks3Client("","","kss.ksyun.com");//!!第三个参数endpoint需要对应bucket所在region!! 详见http://ks3.ksyun.com/doc/api/index.html  Region（区域）一节
 //print_r(listBuckets($client));
 //print_r(deleteBucket($client));
 //print_r(deleteBucketCORS($client));
@@ -225,7 +225,7 @@ function multipartUpload($client){
 	}
 	$total = Utils::getFileSize($file);
 	$partsize = 1024*1024*5;
-	$count = (int)($total/$partsize+1);
+	$count = (int)(($total-1)/$partsize)+1;
 	echo $count."\r\n";
 	for($i = 0;$i < $count;$i++){
 		echo "upload".$i."\r\n";
@@ -328,7 +328,7 @@ function  multipartUploadWithAdpAndCallBack($client){
 	}
 	$partsize = 1024*1024*5;
 	$total = Utils::getFileSize($file);
-	$count = (int)($total/$partsize+1);
+	$count = (int)(($total-1)/$partsize)+1;
 	echo $count."\r\n";
 	for($i = 0;$i < $count;$i++){
 		echo "upload".$i."\r\n";
